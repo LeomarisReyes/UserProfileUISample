@@ -7,77 +7,78 @@
              mc:Ignorable="d"
              x:Class="UserProfileUISample.MainPage">
 
-    <Grid BackgroundColor="White" RowDefinitions="*,Auto">
+    <Grid BackgroundColor="White" RowDefinitions="*,Auto" RowSpacing="0">
     
         <!-- 1. Profile picture-->
         <Image Grid.Row="0" Grid.RowSpan="2" Source="Katty" VerticalOptions="Start" />
-    
-        <!-- 2. Contact information frame-->
-        <Frame Grid.Row="1" BackgroundColor="White" CornerRadius="40" HasShadow="False" HeightRequest="320" VerticalOptions="End">
-            <!-- Blocks: 3 and 4 -->
-            <Grid 
-                ColumnDefinitions="*,56,56" 
-                Padding="25,10,25,0" 
-                RowDefinitions="50,Auto,Auto,Auto,Auto,Auto" 
-                RowSpacing="0">
-                <!-- 4. Contact information-->
-                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Katty White" FontAttributes="Bold"
-                       FontSize="30" />
-                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="New York" TextColor="#a5a2a2" FontSize="16" />
-                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Padding="0,10,0,0" FontSize="16">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="Email: " FontAttributes="Bold" />
-                            <Span Text=" kattywhite@hotmail.com" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <!--4. Contact information: Board inforation-->
-                <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Publications" Style="{StaticResource stlBoardTitle}" />
-                    <Label Grid.Row="1" Grid.Column="0" Text="678" Style="{StaticResource stlBoardDesc}" />
+        
+        <Grid Grid.Row="1" BackgroundColor="Transparent" RowDefinitions="28,*" RowSpacing="0">
+            
+            <!-- 2. Contact information frame-->
+            <Frame Grid.Row="1" BackgroundColor="White" CornerRadius="40" HasShadow="False" 
+                   HeightRequest="{OnPlatform iOS=250, Android=280}" VerticalOptions="End">
+                <!-- Blocks: 3 and 4 -->
+                <Grid 
+                    ColumnDefinitions="*,*,*" 
+                    Padding="25,10,25,0" 
+                    RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" 
+                    RowSpacing="0">
+                    <!-- 4. Contact information-->
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Katty White" FontAttributes="Bold"
+                           FontSize="30" />
+                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="New York" TextColor="#a5a2a2" FontSize="16" />
+                    <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Padding="0,10,0,0" FontSize="16">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Email: " FontAttributes="Bold" />
+                                <Span Text=" kattywhite@hotmail.com" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <!--4. Contact information: Board inforation-->
+                    <Label Grid.Row="3" Grid.Column="0" Text="Publications" Style="{StaticResource stlBoardTitle}" />
+                    <Label Grid.Row="4" Grid.Column="0" Text="678" Style="{StaticResource stlBoardDesc}" />
 
-                    <Label Grid.Row="0" Grid.Column="1" Text="Following" Style="{StaticResource stlBoardTitle}" />
-                    <Label Grid.Row="1" Grid.Column="1" Text="340" Style="{StaticResource stlBoardDesc}" />
+                    <Label Grid.Row="3" Grid.Column="1" Text="Following" Style="{StaticResource stlBoardTitle}" />
+                    <Label Grid.Row="4" Grid.Column="1" Text="340" Style="{StaticResource stlBoardDesc}" />
 
-                    <Label Grid.Row="0" Grid.Column="2" Text="Followers" Style="{StaticResource stlBoardTitle}" />
-                    <Label Grid.Row="1" Grid.Column="2" Text="67k" Style="{StaticResource stlBoardDesc}" />
+                    <Label Grid.Row="3" Grid.Column="2" Text="Followers" Style="{StaticResource stlBoardTitle}" />
+                    <Label Grid.Row="4" Grid.Column="2" Text="67k" Style="{StaticResource stlBoardDesc}" />
+                    <!--4. Contact information: Follow button-->
+                    <Button
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        TextColor="White"
+                        BackgroundColor="#2193f3"
+                        Text="Follow"
+                        Margin="0,20,0,2"
+                        FontAttributes="Bold"
+                        FontSize="17"
+                        HeightRequest="45"
+                        Clicked="FollowClicked" />
                 </Grid>
-                <!--4. Contact information: Follow button-->
+            </Frame>
+
+            <!-- 3. Phone & message buttons-->
+            <!-- Buttons need to be moved to the end of grid to ensure correct z-index to overlapping elements -->
+            <StackLayout Grid.Row="0" Grid.RowSpan="2" Orientation="Horizontal" 
+                         HorizontalOptions="End" VerticalOptions="Start" 
+                         Margin="0,0,45,0" Spacing="10">
                 <Button
-                    Grid.Row="5"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    TextColor="White"
-                    BackgroundColor="#2193f3"
-                    Text="Follow"
-                    Margin="0,20,0,2"
-                    FontAttributes="Bold"
-                    FontSize="17"
-                    HeightRequest="45"
-                    Clicked="FollowClicked" />
-                <!-- 3. Phone & message buttons-->
-                <!-- Buttons need to be moved to the end of grid to ensure correct z-index to overlapping elements -->
-                <Button
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="1"
                     Style="{StaticResource stlContactBtn}"
                     HorizontalOptions="End"
                     VerticalOptions="Start"
                     ImageSource="Phone"
                     Clicked="PhoneClicked" />
                 <Button
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    Grid.Column="2"
                     Style="{StaticResource stlContactBtn}"
                     HorizontalOptions="Start"
                     VerticalOptions="Start"
                     ImageSource="Correo"
                     Clicked="MailClicked" />
-            </Grid>
-        </Frame>
-    
+            </StackLayout>
+
+        </Grid>
     </Grid>
 </ContentPage>
